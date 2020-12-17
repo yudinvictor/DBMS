@@ -1,0 +1,64 @@
+<div class="create-wrap">
+  <div class="create_header flex-center-y">
+    <div class="create_header_left flex-center-y">
+      <div class="create_header_title flex-center-y">
+        <div class="create_header_title_ico flex-center">
+          <button [mat-dialog-close]="true" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="create_header_title_text">
+          Создать автопарк
+        </div>
+      </div>
+    </div>
+    <div class="create_header_right">
+      <button mat-flat-button color="primary" class="general_create-button">
+        Создать
+      </button>
+    </div>
+  </div>
+
+  <div class="create_content">
+    <div class="create_content_main">
+
+      <div class="wrap-create_content_block">
+        <div class="create_content_block_ico flex-center">
+          <mat-icon>room</mat-icon>
+        </div>
+        <div class="create_content_block">
+          <div class="create_cargo_list">
+            <div class="create_cargo flex-center">
+              <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
+                <mat-label>Адрес</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="create_content_help">
+
+      <div class="wrap-create_content_block">
+        <div class="create_content_block_ico flex-center">
+          <mat-icon>apartment</mat-icon>
+        </div>
+        <div class="create_content_block">
+          <div class="create_cargo_list">
+            <div class="create_cargo flex-center">
+              <mat-form-field appearance="fill" class="create_cargo_main-input">
+                <mat-label>Филиал</mat-label>
+                <mat-select>
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

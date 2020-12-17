@@ -1,0 +1,93 @@
+<div class="create-wrap">
+  <div class="create_header flex-center-y">
+    <div class="create_header_left flex-center-y">
+      <div class="create_header_title flex-center-y">
+        <div class="create_header_title_ico flex-center">
+          <button (click)="onNoClick()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="create_header_title_text">
+          Создание заказа
+        </div>
+      </div>
+    </div>
+    <div class="create_header_right">
+      <button (click)="apply()" mat-flat-button color="primary" class="general_create-button">
+        Создать заказ
+      </button>
+    </div>
+  </div>
+
+  <div class="create_content">
+    <div class="create_content_main">
+
+      <div class="wrap-create_content_block">
+        <div class="create_content_block_ico flex-center">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <div class="create_content_block">
+          <div class="create_cargo_list">
+            <div *ngFor="let e of arr; let i = index" class="create_cargo flex-center">
+              <mat-form-field appearance="fill" class="create_cargo_main-input">
+                <mat-label>Название груза</mat-label>
+                <input [(ngModel)]="e.name" matInput>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="create_cargo_add-input">
+                <mat-label>Тип груза (Необязательно)</mat-label>
+                <mat-select [(ngModel)]="e.type">
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="create_cargo_add-input">
+                <mat-label>Вес (в кг)</mat-label>
+                <input [(ngModel)]="e.weight" matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="create_cargo">
+              <button (click)="addCargo()" mat-stroked-button color="primary">
+                <mat-icon>add</mat-icon>
+                Добавить груз
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="create_content_help">
+
+      <div class="wrap-create_content_block">
+        <div class="create_content_block_ico flex-center">
+          <mat-icon>room</mat-icon>
+        </div>
+        <div class="create_content_block">
+          <div class="create_cargo_list">
+            <div class="create_cargo flex-center">
+              <mat-form-field appearance="fill" class="create_cargo_main-input">
+                <mat-label>Откуда</mat-label>
+                <input [(ngModel)]="start" matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="create_cargo flex-center">
+              <mat-form-field appearance="fill" class="create_cargo_main-input">
+                <mat-label>Куда</mat-label>
+                <input [(ngModel)]="finish" matInput>
+              </mat-form-field>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+</div>

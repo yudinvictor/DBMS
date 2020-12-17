@@ -1,0 +1,31 @@
+<div class="header x-c-y">
+  <div class="header_left x-c-y">
+    <div class="header_label">Yudin & Zyulyaev prod.</div>
+  </div>
+  <div class="header_center x-c">
+    <div class="header_menu x-c">
+      <div class="header_menu_e" [routerLink]="['']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="header_menu_active">
+        Главная
+      </div>
+      <div class="header_menu_e" [routerLink]="['/search']" routerLinkActive="header_menu_active">
+        Отследить заказ
+      </div>
+    </div>
+
+  </div>
+  <div class="header_right x-c-y">
+    <a href="https://github.com/yudinvictor/ez750k-MVD-translate" class="github-project x-c-y"
+       target="_blank">
+      <div class="github-project-logo">
+        <img src="https://image.flaticon.com/icons/png/512/25/25231.png" alt="">
+      </div>
+      <div class="github-project-text">
+        Open in GitHub
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="page-content">
+  <router-outlet></router-outlet>
+</div>

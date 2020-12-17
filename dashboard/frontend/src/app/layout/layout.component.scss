@@ -1,0 +1,87 @@
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #e6e6e6;
+  height: 65px;
+  padding: 0 25px;
+  z-index: 2;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+.header_label{
+  font-size: 22px;
+  font-weight: 500;
+  font-family: 'Playfair Display', serif;
+}
+
+.header_left, .header_center, .header_right{
+  width: 100%;
+}
+
+.header_menu{
+  height: 65px;
+  .header_menu_e{
+    outline: none;
+    position: relative;
+    height: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #5f6368;
+    font-weight: 500;
+    font-size: 15px;
+    &:hover{
+      background: #fafafa;
+      color: black;
+    }
+  }
+
+  .header_menu_active{
+    color: #3F51B5 !important;
+    &:after{
+      border-top-width: 0.25rem;
+      border-top-style: solid;
+      -webkit-border-radius: 0.25rem 0.25rem 0 0;
+      border-radius: 0.25rem 0.25rem 0 0;
+      bottom: -0.125rem;
+      content: "";
+      height: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.github-project{
+  cursor: pointer;
+  padding: 5px 5px 5px 10px;
+  border-radius: 6px;
+  transition: 0.1s;
+  color: #333333;
+  outline: none;
+  text-decoration: none;
+  border: none;
+}
+
+.github-project-logo{
+  width: 33px;
+}
+
+.github-project-text{
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+.header_right{
+  justify-content: flex-end;
+}
+
+.page-content{
+  padding-top: 95px;
+}

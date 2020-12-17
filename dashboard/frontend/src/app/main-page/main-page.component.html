@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 flex-center-y">
+      <button (click)="openCreateOrder()" mat-raised-button color="primary" class="x-c-y create-button">
+        <mat-icon>add</mat-icon>
+        Создать заказ
+      </button>
+      <button (click)="openCreateTransit()" mat-raised-button color="accent" class="x-c-y create-button">
+        <mat-icon>local_shipping</mat-icon>
+        Осуществить перевозку
+      </button>
+      <div class="wrap-create-button_more" [matMenuTriggerFor]="menu">
+        <button mat-raised-button color="primary" class="x-c-y create-button create-button_more">
+          <mat-icon>add</mat-icon>
+          Создать ещё...
+        </button>
+      </div>
+
+      <mat-menu #menu="matMenu">
+        <button (click)="openCreateClient()" mat-menu-item>
+          <mat-icon>person_add</mat-icon>
+          <span>Клиента</span>
+        </button>
+        <button (click)="openCreateDriver()" mat-menu-item>
+          <mat-icon>directions_bike</mat-icon>
+          <span>Водителя</span>
+        </button>
+        <button (click)="openCreateTransport()" mat-menu-item>
+          <mat-icon>drive_eta</mat-icon>
+          <span>Транспорт</span>
+        </button>
+        <button (click)="openCreateCarPark()" mat-menu-item>
+          <mat-icon>emoji_transportation</mat-icon>
+          <span>Автопарк</span>
+        </button>
+        <button (click)="openCreateBranch()" mat-menu-item>
+          <mat-icon>apartment</mat-icon>
+          <span>Филиал</span>
+        </button>
+      </mat-menu>
+    </div>
+
+
+  </div>
+
+<!--  <div class="row">-->
+<!--    <div class="col-4">-->
+<!--      <div class="card-chart-pie">-->
+<!--        <div [chart]="chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-8">-->
+<!--      <div class="card-chart-pie">-->
+<!--        <div [chart]="chart2"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>

@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.x-c-y, .flex-center-y{
+  display: flex;
+  align-items: center;
+}
+
+.x-c, .flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  width: 100%;
+}
+
+button{
+  outline: none !important;
+}
+
+
+.mat-button-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.mat-menu-panel{
+  min-width: 250px !important;
+}
