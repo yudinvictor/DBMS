@@ -17,6 +17,7 @@ import { CreateCarparkComponent } from './create/create-carpark/create-carpark.c
 import { CreateDriverComponent } from './create/create-driver/create-driver.component';
 import { CreateTransportComponent } from './create/create-transport/create-transport.component';
 import { CreateClientComponent } from './create/create-client/create-client.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CreateClientComponent } from './create/create-client/create-client.comp
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ChartModule
+    ChartModule,
+    HttpClientModule,
   ],
   providers: [],
   exports: [

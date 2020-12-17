@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Cargo} from '../../interfaces';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {BackService} from '../../back.service';
 
 @Component({
   selector: 'app-create-branch',
@@ -20,6 +21,7 @@ export class CreateBranchComponent implements OnInit {
   finish: string;
 
   constructor(
+    private backService: BackService,
     public dialogRef: MatDialogRef<CreateBranchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
@@ -44,6 +46,9 @@ export class CreateBranchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.backService.getAllCargo().subscribe(res => {
+      console.log(res);
+    });
   }
 
 }

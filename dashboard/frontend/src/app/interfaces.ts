@@ -3,6 +3,7 @@ export interface Cargo{
   name: string;
   weight: number;
   type: string;
+  order?: number;
 }
 
 export interface Order{
@@ -10,3 +11,5 @@ export interface Order{
   start: string;
   finish: string;
 }
+
+

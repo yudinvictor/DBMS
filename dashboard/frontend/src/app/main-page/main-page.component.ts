@@ -154,7 +154,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.openCreateTransit();
+    this.openCreateBranch();
   }
 
 }
