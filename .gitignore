@@ -1,0 +1,4 @@
+/dashboard/backend/venv/
+/dashboard/backend/.idea/
+/dashboard/backend/__pycache__/
+/dashboard/backend/transport/__pycache__/
