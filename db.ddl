@@ -27,6 +27,8 @@ CREATE TABLE driver (
 CREATE TABLE order (
   id INT NOT NULL PRIMARY KEY,
   status VARCHAR(255) NOT NULL,
+  departure_address text NOT NULL,
+  destination_address text NOT NULL,
   client_id INT NOT NULL REFERENCES client (id) 
 );
 
