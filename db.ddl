@@ -24,17 +24,9 @@ CREATE TABLE driver (
   branch_id INT NOT NULL REFERENCES branch (id)
 );
 
-CREATE TABLE manager (
-  id INT NOT NULL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  phone_number VARCHAR(255) NOT NULL,
-  email VARCHAR(254) NOT NULL
-);
-
 CREATE TABLE order (
   id INT NOT NULL PRIMARY KEY,
   status VARCHAR(255) NOT NULL,
-  type VARCHAR(255) NOT NULL,
   client_id INT NOT NULL REFERENCES client (id) 
 );
 
@@ -57,9 +49,9 @@ CREATE TABLE shipping (
 );
 
 CREATE TABLE shipping_orders (
-  id INT NOT NULL PRIMARY KEY,
   shipping_id INT NOT NULL REFERENCES shipping (id) ,
-  order_id INT NOT NULL REFERENCES order (id) 
+  order_id INT NOT NULL REFERENCES "order" (id) ,
+  PRIMARY KEY (shipping_id, order_id)
 );
 
 CREATE TABLE payment (
@@ -67,13 +59,13 @@ CREATE TABLE payment (
   amount FLOAT NOT NULL,
   type VARCHAR(255) NOT NULL,
   status VARCHAR(255) NOT NULL,
-  order_id INT NOT NULL UNIQUE REFERENCES order (id) 
+  order_id INT NOT NULL UNIQUE REFERENCES "order" (id) 
 );
 
 CREATE TABLE cargo (
   id INT NOT NULL PRIMARY KEY,
   weight FLOAT NOT NULL,
   type VARCHAR(255) NOT NULL,
-  order_id INT NOT NULL REFERENCES order (id) 
+  order_id INT NOT NULL REFERENCES "order" (id) 
 );
 
