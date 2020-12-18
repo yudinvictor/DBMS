@@ -18,78 +18,82 @@ export class MainPageComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  // chart = new Chart({
-  //   chart: {
-  //     plotBackgroundColor: null,
-  //     plotBorderWidth: null,
-  //     plotShadow: false,
-  //     type: 'pie'
-  //   },
-  //   title: {
-  //     text: 'Browser market shares in January, 2018'
-  //   },
-  //   tooltip: {
-  //     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  //   },
-  //   accessibility: {
-  //     point: {
-  //       valueSuffix: '%'
-  //     }
-  //   },
-  //   plotOptions: {
-  //     pie: {
-  //       allowPointSelect: true,
-  //       cursor: 'pointer',
-  //       dataLabels: {
-  //         enabled: false
-  //       },
-  //       showInLegend: true
-  //     }
-  //   },
-  //   series: [{
-  //     name: 'Brands',
-  //     colorByPoint: true,
-  //     data: [{
-  //       name: 'Chrome',
-  //       y: 61.41,
-  //       sliced: true,
-  //       selected: true
-  //     }, {
-  //       name: 'Internet Explorer',
-  //       y: 11.84
-  //     }, {
-  //       name: 'Firefox',
-  //       y: 10.85
-  //     }, {
-  //       name: 'Edge',
-  //       y: 4.67
-  //     }, {
-  //       name: 'Safari',
-  //       y: 4.18
-  //     }, {
-  //       name: 'Other',
-  //       y: 7.05
-  //     }]
-  //   }]
-  // });
-  //
-  // chart2 = new Chart({
-  //   chart: {
-  //     type: 'line'
-  //   },
-  //   title: {
-  //     text: 'Linechart'
-  //   },
-  //   credits: {
-  //     enabled: false
-  //   },
-  //   series: [
-  //     {
-  //       name: 'Line 1',
-  //       data: [1, 2, 3]
-  //     }
-  //   ]
-  // });
+  chart = new Chart({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Диаграмма распределения стартовых городов'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    series: [{
+      name: 'Города',
+      colorByPoint: true,
+      data: [{
+        name: 'Москва',
+        y: 61.41,
+        sliced: true,
+        selected: true
+      }, {
+        name: 'Санкт-Петербург',
+        y: 11.84
+      }, {
+        name: 'Екатеринбург',
+        y: 10.85
+      }, {
+        name: 'Новосибирск',
+        y: 4.67
+      }, {
+        name: 'Нягань',
+        y: 4.18
+      }, {
+        name: 'Другие',
+        y: 7.05
+      }]
+    }]
+  });
+
+  chart2 = new Chart({
+    chart: {
+      type: 'line'
+    },
+    title: {
+      text: 'Кол-во новых заказов от дня'
+    },
+    xAxis: {
+      categories: ['15 Dec', '16 Dec', '17 Dec', '18 Dec', '19 Dec', '20 Dec', '21 Dec', '22 Dec']
+    },
+    credits: {
+      enabled: false
+    },
+    series: [
+      {
+        name: 'Line 1',
+        type: 'line',
+        data: [5, 6, 5, 7, 3, 9, 7, 2]
+      }
+    ]
+  });
   configPopup = {
     maxWidth: '100vw',
     width: '100vw',
@@ -154,7 +158,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openCreateBranch();
+    //this.openCreateBranch();
   }
 
 }
