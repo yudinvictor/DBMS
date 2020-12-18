@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Cargo} from './interfaces';
 
+import * as interfaces from './interfaces';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +15,109 @@ export class BackService {
 
 
   constructor(private http: HttpClient) {
-    // this.getUserInfo().subscribe(userInfo => {
-    //   this.userInfo = userInfo;
-    // });
+    this.getAllCargos().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllOrders().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllPayments().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllBranches().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllCarParks().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllTransports().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllDrivers().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllShippings().subscribe(resp => {
+      console.log(resp);
+    });
+    this.getAllClients().subscribe(resp => {
+      console.log(resp);
+    });
   }
+
   getAllCargo(): Observable<Array<Cargo>> {
     return this.http.get<Array<Cargo>>(Endpoints.cargos);
   }
+
+  getAllCargos(): Observable<Array<interfaces.Cargo>> {
+    return this.http.get<Array<Cargo>>(Endpoints.cargos);
+  }
+
+  getAllOrders(): Observable<Array<interfaces.Order>> {
+    return this.http.get<Array<interfaces.Order>>(Endpoints.orders);
+  }
+
+  getAllPayments(): Observable<Array<interfaces.Payment>> {
+    return this.http.get<Array<interfaces.Payment>>(Endpoints.payments);
+  }
+
+  getAllBranches(): Observable<Array<interfaces.Branch>> {
+    return this.http.get<Array<interfaces.Branch>>(Endpoints.branches);
+  }
+
+  getAllCarParks(): Observable<Array<interfaces.CarPark>> {
+    return this.http.get<Array<interfaces.CarPark>>(Endpoints.car_parks);
+  }
+
+  getAllTransports(): Observable<Array<interfaces.Transport>> {
+    return this.http.get<Array<interfaces.Transport>>(Endpoints.transports);
+  }
+
+  getAllDrivers(): Observable<Array<interfaces.Driver>> {
+    return this.http.get<Array<interfaces.Driver>>(Endpoints.drivers);
+  }
+
+  getAllShippings(): Observable<Array<interfaces.Shipping>> {
+    return this.http.get<Array<interfaces.Shipping>>(Endpoints.shippings);
+  }
+
+  getAllClients(): Observable<Array<interfaces.Client>> {
+    return this.http.get<Array<interfaces.Client>>(Endpoints.clients);
+  }
+
+  addClient(client: interfaces.Client): Observable<Array<interfaces.Client>> {
+    return this.http.post<Array<interfaces.Client>>(Endpoints.clients, client);
+  }
+
+  addDriver(driver: interfaces.Driver): Observable<Array<interfaces.Driver>> {
+    return this.http.post<Array<interfaces.Driver>>(Endpoints.drivers, driver);
+  }
+
+  addTransport(transport: interfaces.Transport): Observable<Array<interfaces.Transport>> {
+    return this.http.post<Array<interfaces.Transport>>(Endpoints.transports, transport);
+  }
+
+  addCarPark(carPark: interfaces.CarPark): Observable<Array<interfaces.CarPark>> {
+    return this.http.post<Array<interfaces.CarPark>>(Endpoints.car_parks, carPark);
+  }
+
+  addBranch(branch: interfaces.Branch): Observable<Array<interfaces.Branch>> {
+    return this.http.post<Array<interfaces.Branch>>(Endpoints.branches, branch);
+  }
+
+  addOrder(order: interfaces.Order): Observable<Array<interfaces.Order>> {
+    return this.http.post<Array<interfaces.Order>>(Endpoints.orders, order);
+  }
+
+  addShipping(shipping: interfaces.Shipping): Observable<Array<interfaces.Shipping>> {
+    return this.http.post<Array<interfaces.Shipping>>(Endpoints.shippings, shipping);
+  }
+
+
+  // getAll(name: string)Observable<Any> {
+  //
+  //   return
+  // }
+
 
   // getAllBoards(): Observable<Array<Board>> {
   //   return this.http.get<Array<Board>>(Endpoints.boards, {headers: this.headers});

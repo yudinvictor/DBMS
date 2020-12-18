@@ -2,12 +2,6 @@ from rest_framework import serializers
 from .models import *
 
 
-class ManagerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Manager
-        fields = '__all__'
-
-
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client

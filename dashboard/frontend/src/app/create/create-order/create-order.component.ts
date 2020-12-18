@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Cargo} from '../../interfaces';
+import * as interfaces from '../../interfaces';
+import {BackService} from "../../back.service";
 
 
 @Component({
@@ -10,17 +12,22 @@ import {Cargo} from '../../interfaces';
 })
 export class CreateOrderComponent implements OnInit {
 
-  arr: Array<Cargo> = [
+  arr: Array<interfaces.Cargo> = [
     {
-      name: '123',
-      weight: null,
-      type: null,
+      name: 'first',
+      weight: 16,
+      type: 'большой',
+    },
+    {
+      name: 'second',
+      weight: 1323,
+      type: 'small',
     },
   ];
-  start: string;
-  finish: string;
+  departure_address: string;
+  destination_address: string;
 
-  constructor(
+  constructor(public backService: BackService,
     public dialogRef: MatDialogRef<CreateOrderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
@@ -39,12 +46,21 @@ export class CreateOrderComponent implements OnInit {
   apply(): void {
     this.dialogRef.close({
       cargoes: this.arr,
-      start: this.start,
-      finish: this.finish
+      start: this.departure_address,
+      finish: this.destination_address
     });
   }
 
+  elem: interfaces.Order = {
+    order_cargos: this.arr,
+    departure_address: 'NEW YORK',
+    destination_address: 'SARATOV',
+  };
+
   ngOnInit(): void {
+    // this.backService.addOrder(this.elem).subscribe(resp => {
+    //   console.log(resp);
+    // });
   }
 
 }

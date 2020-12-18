@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as interfaces from '../../interfaces';
+import {BackService} from "../../back.service";
 
 @Component({
   selector: 'app-create-carpark',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCarparkComponent implements OnInit {
 
-  constructor() { }
+  constructor(public backService: BackService) { }
+
+  elem: interfaces.CarPark = {
+    address: 'test_address',
+    branch: 1,
+  };
 
   ngOnInit(): void {
+    // this.backService.addCarPark(this.elem).subscribe(resp => {
+    //   console.log(resp);
+    // });
   }
 
 }

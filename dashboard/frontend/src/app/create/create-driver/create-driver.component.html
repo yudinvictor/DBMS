@@ -31,13 +31,13 @@
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Имя</mat-label>
-                <input matInput>
+                <input [(ngModel)]="elem.name" matInput>
               </mat-form-field>
             </div>
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Номер телефона</mat-label>
-                <input matInput>
+                <input [(ngModel)]="elem.phone_number" matInput>
               </mat-form-field>
             </div>
           </div>

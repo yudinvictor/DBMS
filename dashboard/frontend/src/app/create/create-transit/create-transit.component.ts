@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Cargo} from '../../interfaces';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import * as interfaces from '../../interfaces';
+import {BackService} from "../../back.service";
 
 @Component({
   selector: 'app-create-transit',
@@ -19,9 +21,10 @@ export class CreateTransitComponent implements OnInit {
   start: string;
   finish: string;
 
-  constructor(
+  constructor(public backService: BackService,
     public dialogRef: MatDialogRef<CreateTransitComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -43,7 +46,20 @@ export class CreateTransitComponent implements OnInit {
     });
   }
 
+  elem: interfaces.Shipping = {
+    start_time: new Date(),
+    stop_time: new Date(),
+    departure_address: 'ТЕСТ!',
+    destination_address: 'Destination test',
+    transport: 1,
+    driver: 1,
+    orders: [5, 6, 7],
+  };
+
   ngOnInit(): void {
+    // this.backService.addShipping(this.elem).subscribe(resp => {
+    //   console.log(resp);
+    // });
   }
 
 }

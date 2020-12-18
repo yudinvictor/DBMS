@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Cargo} from '../../interfaces';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BackService} from '../../back.service';
+import * as interfaces from '../../interfaces';
+
 
 @Component({
   selector: 'app-create-branch',
@@ -9,6 +11,10 @@ import {BackService} from '../../back.service';
   styleUrls: ['./create-branch.component.scss']
 })
 export class CreateBranchComponent implements OnInit {
+
+  elem: interfaces.Branch = {
+    address: 'test_address',
+  };
 
   arr: Array<Cargo> = [
     {
@@ -23,7 +29,8 @@ export class CreateBranchComponent implements OnInit {
   constructor(
     private backService: BackService,
     public dialogRef: MatDialogRef<CreateBranchComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -46,9 +53,14 @@ export class CreateBranchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backService.getAllCargo().subscribe(res => {
-      console.log(res);
-    });
+    // this.backService.getAllCargo().subscribe(res => {
+    //   console.log(res);
+    // });
+
+
+    // this.backService.addBranch(this.elem).subscribe(resp => {
+    //   console.log(resp);
+    // })
   }
 
 }

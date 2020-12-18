@@ -11,11 +11,6 @@ from .models import *
 from .serializers import *
 
 
-class ManagerViewSet(viewsets.ModelViewSet):
-    serializer_class = ManagerSerializer
-    queryset = Manager.objects.all()
-
-
 class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()

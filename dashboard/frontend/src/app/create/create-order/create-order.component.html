@@ -35,7 +35,7 @@
               </mat-form-field>
 
               <mat-form-field appearance="fill" class="create_cargo_add-input">
-                <mat-label>Тип груза (Необязательно)</mat-label>
+                <mat-label>Тип груза </mat-label>
                 <mat-select [(ngModel)]="e.type">
                   <mat-option value="option">Option</mat-option>
                 </mat-select>
@@ -69,14 +69,14 @@
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Откуда</mat-label>
-                <input [(ngModel)]="start" matInput>
+                <input [(ngModel)]="departure_address" matInput>
               </mat-form-field>
             </div>
 
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Куда</mat-label>
-                <input [(ngModel)]="finish" matInput>
+                <input [(ngModel)]="destination_address" matInput>
               </mat-form-field>
             </div>
 

@@ -7,7 +7,6 @@ from transport import views
 router = DefaultRouter()
 router.register('cargos', CargoViewSet, basename='cargo')
 router.register('orders', OrderViewSet, basename='order')
-router.register('managers', ManagerViewSet, basename='manager')
 router.register('payments', PaymentViewSet, basename='payment')
 router.register('branches', BranchViewSet, basename='branch')
 router.register('car_parks', CarParkViewSet, basename='car_park')

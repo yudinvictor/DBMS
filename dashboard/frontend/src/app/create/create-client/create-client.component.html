@@ -3,7 +3,8 @@
     <div class="create_header_left flex-center-y">
       <div class="create_header_title flex-center-y">
         <div class="create_header_title_ico flex-center">
-          <button [mat-dialog-close]="true" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <button [mat-dialog-close]="true" mat-icon-button
+                  aria-label="Example icon button with a vertical three dot icon">
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -13,7 +14,7 @@
       </div>
     </div>
     <div class="create_header_right">
-      <button mat-flat-button color="primary" class="general_create-button">
+      <button mat-flat-button color="primary" class="general_create-button" (click)="backService.addClient(elem)">
         Добавить
       </button>
     </div>
@@ -31,13 +32,13 @@
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Имя</mat-label>
-                <input matInput>
+                <input [(ngModel)]="elem.name" matInput>
               </mat-form-field>
             </div>
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Номер телефона</mat-label>
-                <input matInput>
+                <input [(ngModel)]="elem.phone_number" matInput>
               </mat-form-field>
             </div>
           </div>
