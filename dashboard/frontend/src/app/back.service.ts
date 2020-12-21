@@ -13,7 +13,6 @@ import * as interfaces from './interfaces';
 })
 export class BackService {
 
-
   constructor(private http: HttpClient) {
     this.getAllCargos().subscribe(resp => {
       console.log(resp);
