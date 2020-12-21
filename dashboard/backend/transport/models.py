@@ -10,7 +10,7 @@ class Client(models.Model):
 
 
 class Order(models.Model):
-    status = models.CharField(max_length=255, default='Создан', blank=True)
+    status = models.CharField(max_length=255, default='created', blank=True)
     departure_address = models.TextField()
     destination_address = models.TextField()
 

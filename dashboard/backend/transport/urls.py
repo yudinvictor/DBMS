@@ -4,6 +4,10 @@ from transport.views import *
 
 from transport import views
 
+urlpatterns = [
+    path('city/<str:city>/', views.CityView.as_view())
+]
+
 router = DefaultRouter()
 router.register('cargos', CargoViewSet, basename='cargo')
 router.register('orders', OrderViewSet, basename='order')
@@ -14,5 +18,6 @@ router.register('transports', TransportViewSet, basename='transport')
 router.register('drivers', DriverViewSet, basename='driver')
 router.register('shippings', ShippingViewSet, basename='shipping')
 router.register('clients', ClientViewSet, basename='client')
-urlpatterns = router.urls
+urlpatterns += router.urls
+
 

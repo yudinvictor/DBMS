@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from .services import get_last_order_address, get_orders_by_city
 
 
 class ClientSerializer(serializers.ModelSerializer):
@@ -51,6 +52,14 @@ class ShippingCreatingSerializer(serializers.ModelSerializer):
         model = Shipping
         fields = '__all__'
 
+    def validate(self, attrs):
+        orders = attrs.get('orders')
+        for order in orders:
+            last_address = get_last_order_address(order)
+            if last_address != attrs.get('departure_address'):
+                raise serializers.ValidationError('Вы не можете перевезти груз из места, где он не находится')
+        return attrs
+
     def create(self, validated_data):
         orders = validated_data.pop('orders')
         instance = Shipping.objects.create(**validated_data)
@@ -59,7 +68,9 @@ class ShippingCreatingSerializer(serializers.ModelSerializer):
             if order.destination_address == validated_data.get('destination_address'):
                 order.status = 'completed'
                 order.save()
-
+            elif order.status == 'created':
+                order.status = 'in_progress'
+                order.save()
         return instance
 
 
@@ -90,3 +101,17 @@ class OrderSerializer(serializers.ModelSerializer):
             Cargo.objects.create(**cargo, order=instance)
 
         return instance
+
+
+class CitySerializer(serializers.Serializer):
+    orders = OrderSerializer(many=True, required=False)
+    city = serializers.CharField(max_length=255)
+
+    class Meta:
+        fields = ['city']
+        read_only_fields = ['orders']
+
+    def validate(self, data):
+        data['orders'] = get_orders_by_city(data.get('city'))
+
+        return data

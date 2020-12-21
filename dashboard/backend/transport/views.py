@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, views
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -69,3 +69,11 @@ class ShippingViewSet(viewsets.ViewSet):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=201)
+
+
+class CityView(views.APIView):
+
+    def get(self, request, city=None):
+        serializer = CitySerializer(data={'city': city})
+        if serializer.is_valid(raise_exception=True):
+            return Response(serializer.data)
