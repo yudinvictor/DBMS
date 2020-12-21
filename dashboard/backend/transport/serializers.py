@@ -55,6 +55,8 @@ class ShippingCreatingSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         orders = attrs.get('orders')
         for order in orders:
+            if order.status == 'completed':
+                raise serializers.ValidationError('Заказ уже завершен')
             last_address = get_last_order_address(order)
             if last_address != attrs.get('departure_address'):
                 raise serializers.ValidationError('Вы не можете перевезти груз из места, где он не находится')
