@@ -44,26 +44,6 @@ class CargoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    order_cargos = CargoSerializer(many=True)
-
-    status = serializers.CharField(default='created', max_length=255)
-
-    class Meta:
-        model = Order
-        depth = 1
-        fields = ['id', 'status', 'departure_address', 'destination_address', 'order_cargos', 'shippings']
-
-    def create(self, validated_data):
-        cargos = validated_data.pop('order_cargos')
-        instance = Order.objects.create(**validated_data, client=Client.objects.first())
-        for cargo in cargos:
-            Cargo.objects.create(**cargo, order=instance)
-
-        return instance
-
-
-
 class ShippingCreatingSerializer(serializers.ModelSerializer):
     status = serializers.CharField(default='completed', max_length=255)
 
@@ -91,3 +71,22 @@ class ShippingSerializer(serializers.ModelSerializer):
         depth = 2
         fields = '__all__'
 
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_cargos = CargoSerializer(many=True)
+    shippings = ShippingSerializer(many=True)
+
+    status = serializers.CharField(default='created', max_length=255)
+
+    class Meta:
+        model = Order
+        depth = 1
+        fields = ['id', 'status', 'departure_address', 'destination_address', 'order_cargos', 'shippings']
+
+    def create(self, validated_data):
+        cargos = validated_data.pop('order_cargos')
+        instance = Order.objects.create(**validated_data, client=Client.objects.first())
+        for cargo in cargos:
+            Cargo.objects.create(**cargo, order=instance)
+
+        return instance
