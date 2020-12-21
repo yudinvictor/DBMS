@@ -10,6 +10,7 @@ export interface Order{
   order_cargos: Array<Cargo>;
   departure_address: string;
   destination_address: string;
+  shippings?: Array<Shipping>;
 }
 
 export interface Payment {
