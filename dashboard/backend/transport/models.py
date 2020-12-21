@@ -59,9 +59,9 @@ class Shipping(models.Model):
     destination_address = models.TextField()
     status = models.CharField(max_length=255)
 
-    orders = models.ManyToManyField(Order)
+    orders = models.ManyToManyField(Order, related_name='shippings')
     transport = models.ForeignKey(Transport, on_delete=models.PROTECT)
-    driver = models.ForeignKey(Driver, on_delete=models.PROTECT)
+    driver = models.ForeignKey(Driver, on_delete=models.PROTECT, related_name='shippings')
 
 
 class Cargo(models.Model):

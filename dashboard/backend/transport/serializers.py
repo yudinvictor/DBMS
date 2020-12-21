@@ -52,7 +52,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         depth = 1
-        fields = ['id', 'status', 'departure_address', 'destination_address', 'order_cargos']
+        fields = ['id', 'status', 'departure_address', 'destination_address', 'order_cargos', 'shippings']
 
     def create(self, validated_data):
         cargos = validated_data.pop('order_cargos')
@@ -61,6 +61,7 @@ class OrderSerializer(serializers.ModelSerializer):
             Cargo.objects.create(**cargo, order=instance)
 
         return instance
+
 
 
 class ShippingCreatingSerializer(serializers.ModelSerializer):
