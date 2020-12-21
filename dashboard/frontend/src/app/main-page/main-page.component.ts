@@ -9,6 +9,20 @@ import {CreateTransportComponent} from '../create/create-transport/create-transp
 import {CreateDriverComponent} from '../create/create-driver/create-driver.component';
 import {CreateClientComponent} from '../create/create-client/create-client.component';
 
+
+import * as Highcharts from 'highcharts';
+
+declare var require: any;
+let Boost = require('highcharts/modules/boost');
+let noData = require('highcharts/modules/no-data-to-display');
+let More = require('highcharts/highcharts-more');
+
+Boost(Highcharts);
+noData(Highcharts);
+More(Highcharts);
+noData(Highcharts);
+
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -18,60 +32,64 @@ export class MainPageComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  chart = new Chart({
+  public options: any = {
     chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: {
-      text: 'Диаграмма распределения стартовых городов'
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-      point: {
-        valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: false
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie'
         },
-        showInLegend: true
-      }
-    },
-    series: [{
-      name: 'Города',
-      colorByPoint: true,
-      data: [{
-        name: 'Москва',
-        y: 61.41,
-        sliced: true,
-        selected: true
-      }, {
-        name: 'Санкт-Петербург',
-        y: 11.84
-      }, {
-        name: 'Екатеринбург',
-        y: 10.85
-      }, {
-        name: 'Новосибирск',
-        y: 4.67
-      }, {
-        name: 'Нягань',
-        y: 4.18
-      }, {
-        name: 'Другие',
-        y: 7.05
-      }]
-    }]
-  });
+        title: {
+          text: 'Диаграмма распределения стартовых городов'
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+          point: {
+            valueSuffix: '%'
+          }
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: false
+            },
+            showInLegend: true
+          }
+        },
+        series: [{
+          name: 'Города',
+          colorByPoint: true,
+          data: [{
+            name: 'Москва',
+            y: 61.41,
+            sliced: true,
+            selected: true
+          }, {
+            name: 'Санкт-Петербург',
+            y: 11.84
+          }, {
+            name: 'Екатеринбург',
+            y: 10.85
+          }, {
+            name: 'Новосибирск',
+            y: 4.67
+          }, {
+            name: 'Нягань',
+            y: 4.18
+          }, {
+            name: 'Другие',
+            y: 7.05
+          }]
+        }]
+  };
+
+  // chart = new Chart({
+  //
+  // });
 
   chart2 = new Chart({
     chart: {
@@ -158,7 +176,7 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    Highcharts.chart('chart1', this.options);
     //this.openCreateBranch();
   }
-
 }

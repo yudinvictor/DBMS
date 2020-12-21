@@ -12,7 +12,6 @@ import * as interfaces from './interfaces';
   providedIn: 'root'
 })
 export class BackService {
-
   constructor(private http: HttpClient) {
     this.getAllCargos().subscribe(resp => {
       console.log(resp);
@@ -42,6 +41,8 @@ export class BackService {
       console.log(resp);
     });
   }
+
+
 
   getAllCargo(): Observable<Array<Cargo>> {
     return this.http.get<Array<Cargo>>(Endpoints.cargos);
@@ -109,6 +110,10 @@ export class BackService {
 
   addShipping(shipping: interfaces.Shipping): Observable<Array<interfaces.Shipping>> {
     return this.http.post<Array<interfaces.Shipping>>(Endpoints.shippings, shipping);
+  }
+
+  getShippingByOrder(id: number): Observable<interfaces.Order>{
+    return this.http.get<interfaces.Order>(`${Endpoints.orders}${id}/`);
   }
 
 

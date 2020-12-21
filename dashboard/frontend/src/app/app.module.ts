@@ -31,7 +31,7 @@ import {HttpClientModule} from '@angular/common/http';
     CreateCarparkComponent,
     CreateDriverComponent,
     CreateTransportComponent,
-    CreateClientComponent
+    CreateClientComponent,
   ],
   imports: [
     BrowserModule,

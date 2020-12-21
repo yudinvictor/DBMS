@@ -7,9 +7,11 @@ export interface Cargo{
 }
 
 export interface Order{
+  id?: number;
   order_cargos: Array<Cargo>;
   departure_address: string;
   destination_address: string;
+  status?: string;
   shippings?: Array<Shipping>;
 }
 

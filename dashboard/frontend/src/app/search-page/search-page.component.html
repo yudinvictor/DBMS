@@ -6,59 +6,95 @@
           <mat-icon>search</mat-icon>
         </div>
         <div class="search-order_input">
-          <input type="text" placeholder="Введите id заказа">
+          <input [(ngModel)]="idData" type="number" placeholder="Введите id заказа">
         </div>
+        <button (click)="findShip()" mat-flat-button color="primary">
+          Найти!
+        </button>
       </div>
+
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <div class="elem-trans flex-center-y">
+<!--    <div  class="col-12">-->
+<!--      <pre *ngIf="data">-->
+<!--        {{data | json}}-->
+<!--      </pre>-->
+
+<!--    </div>-->
+
+    <div *ngIf="errorData !== ''" class="col-12 flex-center">
+      {{errorData}}
+    </div>
+
+    <div *ngIf="!data" class="col-12 flex-center">
+      Введите id заказа, чтобы посмотреть историю перевозок)
+    </div>
+
+    <div *ngIf="data" class="col-12">
+      <div *ngIf="data.status === 'Создан'" class="elem-trans flex-center-y">
+        <div class="elem-trans_ico">
+          <mat-icon>accessible_forward</mat-icon>
+        </div>
+        <div class="elem-trans_info">
+          <div class="elem-trans_info_way">
+            Ваш заказ все ещё в пути!
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="data.status === 'Completed'" class="elem-trans flex-center-y">
         <div class="elem-trans_ico">
           <mat-icon>tour</mat-icon>
         </div>
         <div class="elem-trans_info">
           <div class="elem-trans_info_way">
-            Заказ #2 доставлен!
+            Ваш заказ доставлен!
           </div>
         </div>
       </div>
-      <div class="elem-trans flex-center-y">
+
+      <div *ngFor="let ship of data.shippings; let i = index" class="elem-trans flex-center-y">
         <div class="elem-trans_ico">
           <mat-icon>airport_shuttle</mat-icon>
         </div>
         <div class="elem-trans_info">
           <div class="elem-trans_info_way">
-            Заказ #2 перевезен из Санкт-Петербург (16 декабря) в Калининград (18 декабря).
+            Заказ #{{data.id}} перевезен
+            из города {{ship.departure_address}} ({{ship.start_time | date}})
+            в город {{ship.destination_address}} ({{ship.stop_time | date}})
           </div>
+
           <div class="elem-trans_info_add">
-            Водитель: Стас Синотов. Код транспорта: G012GB
+            Водитель: {{ship.driver.name}}. Код транспорта: {{ship.transport.number}}
           </div>
+
         </div>
       </div>
-      <div class="elem-trans flex-center-y">
-        <div class="elem-trans_ico">
-          <mat-icon>airport_shuttle</mat-icon>
-        </div>
-        <div class="elem-trans_info">
-          <div class="elem-trans_info_way">
-            Заказ #2 перевезен из Новосибирска (13 декабря) в Санкт-Петербург (15 декабря).
-          </div>
-          <div class="elem-trans_info_add">
-            Водитель: Иван Иванов. Код транспорта: В004KO
-          </div>
-        </div>
-      </div>
+
+<!--      <div class="elem-trans flex-center-y">-->
+<!--        <div class="elem-trans_ico">-->
+<!--          <mat-icon>airport_shuttle</mat-icon>-->
+<!--        </div>-->
+<!--        <div class="elem-trans_info">-->
+<!--          <div class="elem-trans_info_way">-->
+<!--            Заказ #2 перевезен из Новосибирска (13 декабря) в Санкт-Петербург (15 декабря).-->
+<!--          </div>-->
+<!--          <div class="elem-trans_info_add">-->
+<!--            Водитель: Иван Иванов. Код транспорта: В004KO-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="elem-trans flex-center-y">
         <div class="elem-trans_ico">
           <mat-icon>gps_fixed</mat-icon>
         </div>
         <div class="elem-trans_info">
           <div class="elem-trans_info_way">
-            Заказ #2 принят в Новосибирске.
+            Заказ #{{data.id}} принят в городе {{data.departure_address}}.
           </div>
         </div>
       </div>
