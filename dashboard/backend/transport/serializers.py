@@ -85,7 +85,7 @@ class ShippingSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     order_cargos = CargoSerializer(many=True)
-    shippings = ShippingSerializer(many=True)
+    shippings = ShippingSerializer(many=True, required=False)
 
     status = serializers.CharField(default='created', max_length=255)
 

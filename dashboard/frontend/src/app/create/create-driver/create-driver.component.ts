@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import * as interfaces from '../../interfaces';
 import {BackService} from "../../back.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-driver',
@@ -9,16 +11,36 @@ import {BackService} from "../../back.service";
 })
 export class CreateDriverComponent implements OnInit {
 
-  constructor(public backService: BackService) { }
+  constructor(
+    private backService: BackService,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<CreateDriverComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   elem: interfaces.Driver = {
-    name: 'test_name',
-    phone_number: 'test_phone number',
-    branch: 1,
+    name: 'Владислав Синотов',
+    phone_number: '+7 (777) 777-77-77',
+    branch: null,
   };
 
+  dataBranch: Array<interfaces.Branch> = null;
+
+  apply(): void {
+    this.backService.addDriver(this.elem).subscribe((res) => {
+      this.snackBar.open('Водитель добавлен!', '', {
+        duration: 3000,
+      });
+      console.log('New driver', res);
+      this.dialogRef.close();
+    });
+  }
+
   ngOnInit(): void {
-    // this.backService.addDriver(this.elem).subscribe(resp => {
+    this.backService.getAllBranches().subscribe(res => {
+      this.dataBranch = res;
+    });
+    // this.backService.addCarPark(this.elem).subscribe(resp => {
     //   console.log(resp);
     // });
   }

@@ -3,6 +3,7 @@ import {Cargo} from '../../interfaces';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BackService} from '../../back.service';
 import * as interfaces from '../../interfaces';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -13,7 +14,7 @@ import * as interfaces from '../../interfaces';
 export class CreateBranchComponent implements OnInit {
 
   elem: interfaces.Branch = {
-    address: 'test_address',
+    address: '',
   };
 
   arr: Array<Cargo> = [
@@ -28,6 +29,7 @@ export class CreateBranchComponent implements OnInit {
 
   constructor(
     private backService: BackService,
+    private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CreateBranchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
@@ -45,10 +47,11 @@ export class CreateBranchComponent implements OnInit {
   }
 
   apply(): void {
-    this.dialogRef.close({
-      cargoes: this.arr,
-      start: this.start,
-      finish: this.finish
+    this.backService.addBranch(this.elem).subscribe((res) => {
+      this.snackBar.open('Филиал создан!', '', {
+        duration: 3000,
+      });
+      this.dialogRef.close();
     });
   }
 

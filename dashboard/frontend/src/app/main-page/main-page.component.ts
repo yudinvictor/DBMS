@@ -177,6 +177,6 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     Highcharts.chart('chart1', this.options);
-    //this.openCreateBranch();
+    this.openCreateOrder();
   }
 }
