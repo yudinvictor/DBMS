@@ -108,7 +108,7 @@ export class BackService {
     return this.http.post<Array<interfaces.Order>>(Endpoints.orders, order);
   }
 
-  addShipping(shipping: interfaces.Shipping): Observable<Array<interfaces.Shipping>> {
+  addShipping(shipping: interfaces.ReqShipping): Observable<Array<interfaces.Shipping>> {
     return this.http.post<Array<interfaces.Shipping>>(Endpoints.shippings, shipping);
   }
 
@@ -116,6 +116,9 @@ export class BackService {
     return this.http.get<interfaces.Order>(`${Endpoints.orders}${id}/`);
   }
 
+  getOrderByTown(town: string): Observable<any> {
+    return this.http.get<any>(`${Endpoints.orders_in_town}${town}/`);
+  }
 
   // getAll(name: string)Observable<Any> {
   //

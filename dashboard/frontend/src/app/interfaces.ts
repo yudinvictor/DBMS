@@ -58,7 +58,19 @@ export interface Shipping {
   destination_address: string;
   transport: number | Transport;
   driver: number | Driver;
-  orders: Array<number> | Array<Driver>;
+  orders: Array<number> | Array<Order>;
+}
+
+export interface ReqShipping {
+  id?: number;
+  status?: string;
+  start_time: Date;
+  stop_time: Date;
+  departure_address: string;
+  destination_address: string;
+  transport: number | Transport;
+  driver: number | Driver;
+  orders: Array<number>;
 }
 
 export interface Client {

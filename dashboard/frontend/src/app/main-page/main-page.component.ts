@@ -30,7 +30,8 @@ noData(Highcharts);
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              ) {}
 
   public options: any = {
     chart: {
@@ -177,6 +178,6 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     Highcharts.chart('chart1', this.options);
-    this.openCreateOrder();
+    // this.openCreateTransit();
   }
 }

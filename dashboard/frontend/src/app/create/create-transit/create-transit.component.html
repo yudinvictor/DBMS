@@ -3,7 +3,7 @@
     <div class="create_header_left flex-center-y">
       <div class="create_header_title flex-center-y">
         <div class="create_header_title_ico flex-center">
-          <button (click)="onNoClick()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <button [mat-dialog-close]="true" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -13,7 +13,8 @@
       </div>
     </div>
     <div class="create_header_right">
-      <button (click)="apply()" mat-flat-button color="primary" class="general_create-button">
+      <button (click)="apply()" mat-flat-button color="primary" class="general_create-button"
+      [disabled]="!elem.transport || !elem.driver">
         Создать заказ
       </button>
     </div>
@@ -28,67 +29,60 @@
         </div>
         <div class="create_content_block">
           <div class="create_cargo_list">
-            <div *ngFor="let e of arr; let i = index" class="create_cargo flex-center">
+
+            <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Пункт отправления</mat-label>
-                <input [(ngModel)]="e.name" matInput>
+                <mat-select (selectionChange)="changeTown()" [(ngModel)]="elem.departure_address">
+                  <mat-option *ngFor="let e of towns" [value]="e">
+                    {{e}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="fill" class="mgl5 create_cargo_main-input">
+              <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Пункт назначения</mat-label>
-                <input [(ngModel)]="e.name" matInput>
+                <mat-select [(ngModel)]="elem.destination_address">
+                  <mat-option *ngFor="let e of towns" [value]="e">
+                    {{e}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
           </div>
         </div>
       </div>
-
 
       <div class="wrap-create_content_block">
         <div class="create_content_block_ico flex-center"></div>
         <div class="create_content_block">
           <div class="title-order-list">
-            Выберите грузы которые будете перевозить из города N
+            Выберите грузы которые будете перевозить из города {{elem.departure_address}}
           </div>
         </div>
       </div>
 
-      <div class="wrap-create_content_block">
+      <div *ngIf="dataOrdersInTown" class="wrap-create_content_block">
         <div class="create_content_block_ico flex-center">
           <mat-icon>list_alt</mat-icon>
         </div>
         <div class="create_content_block">
           <div class="order-list">
-            <div class="order-list_e flex-center-y">
+            <div *ngFor="let order of dataOrdersInTown" class="order-list_e flex-center-y"
+            (click)="toggleOrderToSet(order.id)">
               <div class="order-list_e_check flex-center">
-                <mat-checkbox class="example-margin"></mat-checkbox>
+                <mat-checkbox [checked]="selectId.has(order.id)" class="example-margin"></mat-checkbox>
               </div>
               <div class="order-list_e_info">
                 <div class="order-list_e_info_order-id">
-                  <span class="fw500">Заказ #213.</span>
-                  Сейчас в <span class="fw500">Москве.</span>
-                  Пункт назначения: <span class="fw500">СПб</span>
+                  <span class="fw500">Заказ #{{order.id}}.</span>
+                  Сейчас в <span class="fw500">{{elem.departure_address}}.</span>
+                  Конечный пункт назначения: <span class="fw500">{{order.destination_address}}</span>
                   <br>
                   <span class="fw500">Грузы: </span>
-                  <span>Велосипед (Обычный) (10кг), </span>
-                  <span>Нефть (Наливной) (2000кг)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="order-list_e flex-center-y">
-              <div class="order-list_e_check flex-center">
-                <mat-checkbox class="example-margin"></mat-checkbox>
-              </div>
-              <div class="order-list_e_info">
-                <div class="order-list_e_info_order-id">
-                  <span class="fw500">Заказ #213.</span>
-                  Сейчас в <span class="fw500">Москве.</span>
-                  Пункт назначения: <span class="fw500">СПб</span>
-                  <br>
-                  <span class="fw500">Грузы: </span>
-                  <span>Велосипед (Обычный) (10кг), </span>
-                  <span>Нефть (Наливной) (2000кг)</span>
+                  <span *ngFor="let c of order.order_cargos" >
+                    {{c.name}} ({{c.type}}) ({{c.weight}})
+                  </span>
                 </div>
               </div>
             </div>
@@ -108,7 +102,7 @@
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Дата отправки</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input matInput [(ngModel)]="elem.start_time" [matDatepicker]="picker">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -117,12 +111,11 @@
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Дата прибытия</mat-label>
-                <input matInput [matDatepicker]="picker2">
+                <input matInput [(ngModel)]="elem.stop_time"  [matDatepicker]="picker2">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
             </div>
-
           </div>
         </div>
       </div>
@@ -131,12 +124,16 @@
         <div class="create_content_block_ico flex-center">
           <mat-icon>person</mat-icon>
         </div>
-        <div class="create_content_block">
+        <div *ngIf="dataDrivers" class="create_content_block">
           <div class="create_cargo_list">
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Водитель</mat-label>
-                <input matInput>
+                <mat-select [(ngModel)]="elem.driver">
+                  <mat-option *ngFor="let driver of dataDrivers" [value]="driver.id">
+                    #{{driver.id}}, {{driver.name}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
           </div>
@@ -147,12 +144,16 @@
         <div class="create_content_block_ico flex-center">
           <mat-icon>local_shipping</mat-icon>
         </div>
-        <div class="create_content_block">
+        <div *ngIf="dataTransport" class="create_content_block">
           <div class="create_cargo_list">
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Транспорт</mat-label>
-                <input matInput>
+                <mat-select [(ngModel)]="elem.transport">
+                  <mat-option *ngFor="let transport of dataTransport" [value]="transport.id">
+                    #{{transport.id}}, {{transport.type}}, {{transport.number}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
           </div>
