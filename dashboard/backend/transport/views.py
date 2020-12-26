@@ -1,13 +1,7 @@
-from django.http import Http404
-from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import status, viewsets, views
+from rest_framework import viewsets, views
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from .models import *
 from .serializers import *
 
 
@@ -60,8 +54,8 @@ class ShippingViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
         queryset = Shipping.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = ShippingCreatingSerializer(user)
+        shipping = get_object_or_404(queryset, pk=pk)
+        serializer = ShippingSerializer(shipping)
         return Response(serializer.data)
 
     def create(self, request):

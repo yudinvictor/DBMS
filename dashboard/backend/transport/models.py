@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Client(models.Model):
-    name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=255)
+    name = models.TextField()
+    phone_number = models.CharField(max_length=15)
 
     def __str__(self):
         return self.name
@@ -14,15 +14,15 @@ class Order(models.Model):
     departure_address = models.TextField()
     destination_address = models.TextField()
 
-    client = models.ForeignKey(Client, on_delete=models.PROTECT)
+    client = models.ForeignKey(Client, on_delete=models.PROTECT, related_name='orders')
 
     def __str__(self):
         return 'от ' + self.client.name + ' из ' + self.departure_address + ' в ' + self.destination_address
 
 
 class Payment(models.Model):
-    amount = models.FloatField()
-    type = models.CharField(max_length=255)
+    amount = models.BigIntegerField()
+    type = models.CharField(max_length=20)
     status = models.CharField(max_length=255)
 
     order = models.OneToOneField(Order, on_delete=models.PROTECT)
@@ -39,15 +39,15 @@ class CarPark(models.Model):
 
 
 class Transport(models.Model):
-    type = models.CharField(max_length=255)
-    number = models.CharField(max_length=255)
+    type = models.CharField(max_length=20)
+    number = models.CharField(max_length=10)
 
     car_park = models.ForeignKey(CarPark, on_delete=models.PROTECT)
 
 
 class Driver(models.Model):
-    name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=255)
+    name = models.TextField(max_length=255)
+    phone_number = models.CharField(max_length=15)
 
     branch = models.ForeignKey(Branch, on_delete=models.PROTECT)
 
@@ -67,9 +67,9 @@ class Shipping(models.Model):
 class Cargo(models.Model):
     name = models.TextField()
     weight = models.FloatField()
-    type = models.CharField(max_length=255)
+    type = models.CharField(max_length=20)
 
     order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='order_cargos', null=True, blank=True)
 
     def __str__(self):
-        return self.name + ' весом' + str(self.weight) + ' kg'
+        return self.name + ' весом ' + str(self.weight) + ' kg'

@@ -3,3 +3,6 @@
 /dashboard/backend/__pycache__/
 /dashboard/backend/transport/__pycache__/
 /dashboard/backend/transport_project/__pycache__/
+dashboard/backend/.ipynb_checkpoints/
+
+*.pyc

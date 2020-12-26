@@ -59,7 +59,8 @@ class ShippingCreatingSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Заказ уже завершен')
             last_address = get_last_order_address(order)
             if last_address != attrs.get('departure_address'):
-                raise serializers.ValidationError('Вы не можете перевезти груз из места, где он не находится')
+                raise serializers.ValidationError(
+                    'Вы не можете перевезти груз из места, где он не находится')
         return attrs
 
     def create(self, validated_data):
@@ -87,14 +88,15 @@ class ShippingSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     order_cargos = CargoSerializer(many=True)
-    shippings = ShippingSerializer(many=True)
+    shippings = ShippingSerializer(many=True, required=False)
 
     status = serializers.CharField(default='created', max_length=255)
 
     class Meta:
         model = Order
         depth = 1
-        fields = ['id', 'status', 'departure_address', 'destination_address', 'order_cargos', 'shippings']
+        fields = ['id', 'status', 'departure_address',
+                  'destination_address', 'order_cargos', 'shippings']
 
     def create(self, validated_data):
         cargos = validated_data.pop('order_cargos')
