@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div *ngFor="let ship of data.shippings; let i = index" class="elem-trans flex-center-y">
+      <div *ngFor="let ship of data.shippings.reverse()" class="elem-trans flex-center-y">
         <div class="elem-trans_ico">
           <mat-icon>airport_shuttle</mat-icon>
         </div>

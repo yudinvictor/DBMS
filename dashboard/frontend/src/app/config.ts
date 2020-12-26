@@ -1,6 +1,7 @@
 export const host = 'http://127.0.0.1:8000';
 
 export const Endpoints = {
+  orders_in_town: `${host}/api/city/`,
   cargos: `${host}/api/cargos/`,
   orders: `${host}/api/orders/`,
   payments: `${host}/api/payments/`,

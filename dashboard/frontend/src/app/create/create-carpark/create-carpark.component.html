@@ -13,13 +13,15 @@
       </div>
     </div>
     <div class="create_header_right">
-      <button mat-flat-button color="primary" class="general_create-button">
+      <button (click)="apply()" mat-flat-button color="primary" class="general_create-button"
+      [disabled]="!elem.branch">
         Создать
       </button>
     </div>
   </div>
 
   <div class="create_content">
+
     <div class="create_content_main">
 
       <div class="wrap-create_content_block">
@@ -31,7 +33,7 @@
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="mgr5 create_cargo_main-input">
                 <mat-label>Адрес</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="elem.address">
               </mat-form-field>
             </div>
           </div>
@@ -44,13 +46,15 @@
         <div class="create_content_block_ico flex-center">
           <mat-icon>apartment</mat-icon>
         </div>
-        <div class="create_content_block">
+        <div *ngIf="dataBranch" class="create_content_block">
           <div class="create_cargo_list">
             <div class="create_cargo flex-center">
               <mat-form-field appearance="fill" class="create_cargo_main-input">
                 <mat-label>Филиал</mat-label>
-                <mat-select>
-                  <mat-option value="option">Option</mat-option>
+                <mat-select [(ngModel)]="elem.branch">
+                  <mat-option *ngFor="let branch of dataBranch" [value]="branch.id">
+                    #{{branch.id}}, {{branch.address}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

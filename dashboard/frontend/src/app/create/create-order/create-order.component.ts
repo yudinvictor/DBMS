@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Cargo} from '../../interfaces';
 import * as interfaces from '../../interfaces';
 import {BackService} from "../../back.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -12,50 +13,50 @@ import {BackService} from "../../back.service";
 })
 export class CreateOrderComponent implements OnInit {
 
-  arr: Array<interfaces.Cargo> = [
-    {
-      name: 'first',
-      weight: 16,
-      type: 'большой',
-    },
-    {
-      name: 'second',
-      weight: 1323,
-      type: 'small',
-    },
-  ];
-  departure_address: string;
-  destination_address: string;
-
-  constructor(public backService: BackService,
+  constructor(
+    private backService: BackService,
+    private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CreateOrderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
+  towns: Array<string> = [
+    'Москва',
+    'Санкт-Петербург',
+    'Нягань',
+    'Тверь',
+    'Стальск kekw'
+  ];
+
+  elem: interfaces.Order = {
+    order_cargos: [
+      {
+        name: 'Киберпук',
+        weight: 8,
+        type: 'Обычный',
+      }
+    ],
+    departure_address: 'Москва',
+    destination_address: 'Тверь',
+  };
+
   addCargo(): void {
-    this.arr.push({
+    this.elem.order_cargos.push({
       name: 'Ещё один груз',
-      weight: null,
-      type: null,
+      weight: 8,
+      type: 'Обычный',
     });
   }
 
   apply(): void {
-    this.dialogRef.close({
-      cargoes: this.arr,
-      start: this.departure_address,
-      finish: this.destination_address
+    this.backService.addOrder(this.elem).subscribe(res => {
+      this.snackBar.open('Заказ создан!', '', {
+        duration: 3000,
+      });
+      console.log('New order', res);
+      this.dialogRef.close();
     });
   }
-
-  elem: interfaces.Order = {
-    order_cargos: this.arr,
-    departure_address: 'NEW YORK',
-    destination_address: 'SARATOV',
-  };
 
   ngOnInit(): void {
     // this.backService.addOrder(this.elem).subscribe(resp => {
