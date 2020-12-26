@@ -13,14 +13,14 @@ CREATE TABLE car_park (
 
 CREATE TABLE client (
   id INT NOT NULL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  phone_number VARCHAR(255) NOT NULL
+  name text NOT NULL,
+  phone_number VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE driver (
   id INT NOT NULL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  phone_number VARCHAR(255) NOT NULL,
+  name text NOT NULL,
+  phone_number VARCHAR(15) NOT NULL,
   branch_id INT NOT NULL REFERENCES branch (id)
 );
 
@@ -34,8 +34,8 @@ CREATE TABLE order (
 
 CREATE TABLE transport (
   id INT NOT NULL PRIMARY KEY,
-  type VARCHAR(255) NOT NULL,
-  number VARCHAR(255) NOT NULL,
+  type VARCHAR(20) NOT NULL,
+  number VARCHAR(10) NOT NULL,
   car_park_id INT NOT NULL REFERENCES car_park (id) 
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE shipping_orders (
 
 CREATE TABLE payment (
   id INT NOT NULL PRIMARY KEY,
-  amount FLOAT NOT NULL,
-  type VARCHAR(255) NOT NULL,
+  amount bigint NOT NULL,
+  type VARCHAR(20) NOT NULL,
   status VARCHAR(255) NOT NULL,
   order_id INT NOT NULL UNIQUE REFERENCES "order" (id) 
 );
@@ -67,7 +67,7 @@ CREATE TABLE payment (
 CREATE TABLE cargo (
   id INT NOT NULL PRIMARY KEY,
   weight FLOAT NOT NULL,
-  type VARCHAR(255) NOT NULL,
+  type VARCHAR(20) NOT NULL,
   order_id INT NOT NULL REFERENCES "order" (id) 
 );
 
